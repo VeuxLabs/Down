@@ -17,6 +17,6 @@ Pod::Spec.new do |spec|
   spec.module_name = "Down"
   spec.preserve_paths = "Source/cmark/module.modulemap", "Source/cmark/*.inc", "Source/cmark/COPYING"
   spec.pod_target_xcconfig = { 'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/Down/Source/cmark/**' }
-  spec.ios.resource = 'Resources/DownView.bundle'
-  spec.osx.resource = 'Resources/DownView.bundle'
+  spec.ios.resources = 'Resources/**/*.bundle'
+  spec.osx.resources = 'Resources/**/*.bundle'
 end
