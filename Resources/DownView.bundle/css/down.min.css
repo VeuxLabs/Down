@@ -650,3 +650,8 @@ hr {
 .hljs-strong {
     font-weight: 700
 }
+
+* {
+    color: #ffffff;
+    background-color: #424242
+}
