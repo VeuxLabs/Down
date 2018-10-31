@@ -654,4 +654,31 @@ hr {
 * {
     color: #ffffff;
     background-color: #424242
+    
+}
+
+h1 {
+    font-size: 20px
+}
+
+h2 {
+    font-size: 16px
+}
+
+
+h3 {
+    font-size: 14px
+}
+
+
+h4 {
+    font-size: 14px
+}
+
+p {
+    font-size: 14px
+}
+
+body {
+    font-size: 14px
 }
