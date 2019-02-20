@@ -2,7 +2,7 @@
 #include <string.h>
 
 #include "config.h"
-#include "node.h"
+#include "nodeDown.h"
 
 static void S_node_unlink(cmark_node *node);
 

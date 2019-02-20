@@ -5,7 +5,7 @@
 
 #include "config.h"
 #include "cmark.h"
-#include "node.h"
+#include "nodeDown.h"
 #include "buffer.h"
 #include "houdini.h"
 

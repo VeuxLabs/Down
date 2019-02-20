@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
-#include "node.h"
+#include "nodeDown.h"
 #include "houdini.h"
 #include "cmark.h"
 #include "buffer.h"

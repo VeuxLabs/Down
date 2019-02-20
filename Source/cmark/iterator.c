@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "config.h"
-#include "node.h"
+#include "nodeDown.h"
 #include "cmark.h"
 #include "iterator.h"
 

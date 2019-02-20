@@ -2,7 +2,7 @@
 #define CMARK_AST_H
 
 #include <stdio.h>
-#include "node.h"
+#include "nodeDown.h"
 #include "buffer.h"
 
 #ifdef __cplusplus
