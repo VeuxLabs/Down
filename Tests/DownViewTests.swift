@@ -3,7 +3,7 @@
 //  Down
 //
 //  Created by Rob Phillips on 6/1/16.
-//  Copyright © 2016-2019 Glazed Donut, LLC. All rights reserved.
+//  Copyright © 2016 Glazed Donut, LLC. All rights reserved.
 //
 
 #if os(tvOS)
@@ -19,7 +19,7 @@ class DownViewTests: XCTestCase {
         let expect1 = expectation(description: "DownView sets the html and validates the html is correct")
         var downView: DownView?
         downView = try? DownView(frame: .zero, markdownString: "## [Down](https://github.com/iwasrobbed/Down)", didLoadSuccessfully: {
-            self._pageContents(for: downView!) { htmlString in
+            self._pageContents(for: downView!) { (htmlString) in
                 XCTAssertTrue(htmlString!.contains("css/down.min.css"))
                 XCTAssertTrue(htmlString!.contains("https://github.com/iwasrobbed/Down"))
                 
@@ -38,7 +38,7 @@ class DownViewTests: XCTestCase {
         let expect1 = expectation(description: "DownView sets the html and validates the html is correct")
         var downView: DownView?
         downView = try? DownView(frame: .zero, markdownString: "## [Down](https://github.com/iwasrobbed/Down)") {
-            self._pageContents(for: downView!) { htmlString in
+            self._pageContents(for: downView!) { (htmlString) in
                 XCTAssertTrue(htmlString!.contains("css/down.min.css"))
                 XCTAssertTrue(htmlString!.contains("https://github.com/iwasrobbed/Down"))
                 
@@ -54,7 +54,7 @@ class DownViewTests: XCTestCase {
         
         let expect2 = expectation(description: "DownView sets the html and validates the html is correct")
         try? downView?.update(markdownString:  "## [Google](https://google.com)") {
-            self._pageContents(for: downView!) { htmlString in
+            self._pageContents(for: downView!) { (htmlString) in
                 XCTAssertTrue(htmlString!.contains("css/down.min.css"))
                 XCTAssertTrue(htmlString!.contains("https://google.com"))
                 
@@ -81,7 +81,7 @@ class DownViewTests: XCTestCase {
 
         var downView: DownView?
         downView = try? DownView(frame: .zero, markdownString: "## [Down](https://github.com/iwasrobbed/Down)", templateBundle: templateBundle, didLoadSuccessfully: {
-            self._pageContents(for: downView!) { htmlString in
+            self._pageContents(for: downView!) { (htmlString) in
                 XCTAssertTrue(htmlString!.contains("css/down.min.css"))
                 XCTAssertTrue(htmlString!.contains("https://github.com/iwasrobbed/Down"))
                 XCTAssertTrue(htmlString!.contains("But also, custom HTML!"))
@@ -96,59 +96,6 @@ class DownViewTests: XCTestCase {
             }
         }
     }
-
-	func testDownOptions() {
-        let markdownString = "## [Down](https://github.com/iwasrobbed/Down)\n\n<strong>I'm strong!</strong>"
-        let renderedHTML = "<strong>I'm strong!</strong>"
-
-        // Set this view to initially be HTML safe
-		let safeExpect = expectation(description: "DownView default init strips unsafe HTML")
-        let toggleSafeExpect = expectation(description: "DownView update to unsafe does not strip unsafe HTML")
-		var safeDownView: DownView?
-		safeDownView = try? DownView(frame: .zero, markdownString: markdownString, didLoadSuccessfully: {
-			self._pageContents(for: safeDownView!) { htmlString in
-                XCTAssertTrue(safeDownView?.options == .default)
-				XCTAssertFalse(htmlString!.contains(renderedHTML))
-				safeExpect.fulfill()
-
-                // Then change it to HTML unsafe options and ensure it's changed
-                try? safeDownView?.update(markdownString: markdownString, options: .unsafe, didLoadSuccessfully: {
-                    XCTAssertTrue(safeDownView?.options == .unsafe)
-                    self._pageContents(for: safeDownView!) { htmlString in
-                        XCTAssertTrue(htmlString!.contains(renderedHTML))
-                        toggleSafeExpect.fulfill()
-                    }
-                })
-			}
-		})
-
-        // Alternatively, init another view to be HTML unsafe
-        let unsafeExpect = expectation(description: "DownView unsafe init does not strip unsafe HTML")
-        let toggleUnsafeExpect = expectation(description: "DownView update to safe strips unsafe HTML")
-        var unsafeDownView: DownView?
-        unsafeDownView = try? DownView(frame: .zero, markdownString: markdownString, options: .unsafe, didLoadSuccessfully: {
-            self._pageContents(for: unsafeDownView!) { htmlString in
-                XCTAssertTrue(unsafeDownView?.options == .unsafe)
-                XCTAssertTrue(htmlString!.contains(renderedHTML))
-                unsafeExpect.fulfill()
-
-                // And then toggle it to be HTML safe and ensure it's changed
-                try? unsafeDownView?.update(markdownString: markdownString, options: .default, didLoadSuccessfully: {
-                    XCTAssertTrue(unsafeDownView?.options == .default)
-                    self._pageContents(for: unsafeDownView!) { htmlString in
-                        XCTAssertFalse(htmlString!.contains(renderedHTML))
-                        toggleUnsafeExpect.fulfill()
-                    }
-                })
-            }
-        })
-
-        waitForExpectations(timeout: 10) { (error: Error?) in
-            if let error = error {
-                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
-            }
-        }
-	}
 
     @available(iOS 11.0, macOS 10.13, *)
     func testCustomURLSchemeHandler() {
@@ -198,7 +145,7 @@ class DownViewTests: XCTestCase {
     }
 }
 
-private extension DownViewTests {
+fileprivate extension DownViewTests {
     
     func _pageContents(for downView: DownView, completion: @escaping (_ htmlString: String?) -> ()) {
         downView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, _) in
