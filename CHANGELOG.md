@@ -1,5 +1,67 @@
 # Change Log
 
+## [v0.6.1](https://github.com/iwasrobbed/Down/tree/v0.6.1) (2018-11-23)
+[Full Changelog](https://github.com/iwasrobbed/Down/compare/v0.6.0...v0.6.1)
+
+**Closed issues:**
+
+- 2 Swift Compiler Errors when installing Down on iOS [\#117](https://github.com/iwasrobbed/Down/issues/117)
+- How to update to the latest version of the cmark library [\#115](https://github.com/iwasrobbed/Down/issues/115)
+
+**Merged pull requests:**
+
+- \[travis\] Update to retry [\#114](https://github.com/iwasrobbed/Down/pull/114) ([iwasrobbed](https://github.com/iwasrobbed))
+- Fix macOS Platform, Custom URL Scheme Handler, Polish Demos. [\#110](https://github.com/iwasrobbed/Down/pull/110) ([chriszielinski](https://github.com/chriszielinski))
+
+## [v0.6.0](https://github.com/iwasrobbed/Down/tree/v0.6.0) (2018-11-10)
+[Full Changelog](https://github.com/iwasrobbed/Down/compare/v0.5.3...v0.6.0)
+
+**Implemented enhancements:**
+
+- \[iOS 10+\] Warnings for WebKit signal service and latex.c [\#94](https://github.com/iwasrobbed/Down/issues/94)
+- Update cmark version to latest stable release [\#84](https://github.com/iwasrobbed/Down/issues/84)
+
+**Closed issues:**
+
+- HTML to Markdowndow? [\#107](https://github.com/iwasrobbed/Down/issues/107)
+- Blockquote does not work in NSAttributedString [\#106](https://github.com/iwasrobbed/Down/issues/106)
+- Support for Dynamic Type [\#90](https://github.com/iwasrobbed/Down/issues/90)
+
+**Merged pull requests:**
+
+- \[Down\] Bump to v0.6.0 [\#113](https://github.com/iwasrobbed/Down/pull/113) ([iwasrobbed](https://github.com/iwasrobbed))
+- \[cmark\] Update lib to v0.28.3 [\#112](https://github.com/iwasrobbed/Down/pull/112) ([phoney](https://github.com/phoney))
+- Update project to Xcode 10 [\#109](https://github.com/iwasrobbed/Down/pull/109) ([funkyboy](https://github.com/funkyboy))
+
+## [v0.5.3](https://github.com/iwasrobbed/Down/tree/v0.5.3) (2018-09-19)
+[Full Changelog](https://github.com/iwasrobbed/Down/compare/v0.5.2...v0.5.3)
+
+**Implemented enhancements:**
+
+- &rdquo; not being rendered [\#95](https://github.com/iwasrobbed/Down/issues/95)
+- Update issue templates [\#101](https://github.com/iwasrobbed/Down/pull/101) ([iwasrobbed](https://github.com/iwasrobbed))
+
+**Fixed bugs:**
+
+- \[Xcode 10\] Crash in XCBuildService; need to use old build system [\#91](https://github.com/iwasrobbed/Down/issues/91)
+
+**Closed issues:**
+
+- DownView font size on iPad is huge [\#102](https://github.com/iwasrobbed/Down/issues/102)
+- Is there a way to convert NSAttributedString back to markdown? [\#98](https://github.com/iwasrobbed/Down/issues/98)
+- Back Gesture [\#96](https://github.com/iwasrobbed/Down/issues/96)
+- Access for  [\#92](https://github.com/iwasrobbed/Down/issues/92)
+- Image size NSAttributedString [\#89](https://github.com/iwasrobbed/Down/issues/89)
+- Dependency analysis warnings with Cocoapods [\#88](https://github.com/iwasrobbed/Down/issues/88)
+- WatchKit Support [\#71](https://github.com/iwasrobbed/Down/issues/71)
+- Installation via Swift Package Manager [\#61](https://github.com/iwasrobbed/Down/issues/61)
+
+**Merged pull requests:**
+
+- \[Xcode 10\]\[Carthage\] Use new build system [\#104](https://github.com/iwasrobbed/Down/pull/104) ([torokzsolt](https://github.com/torokzsolt))
+- Updates the project settings to use the Legacy Build System. [\#97](https://github.com/iwasrobbed/Down/pull/97) ([pieromattos](https://github.com/pieromattos))
+- \[Release\] v0.5.2 [\#87](https://github.com/iwasrobbed/Down/pull/87) ([iwasrobbed](https://github.com/iwasrobbed))
+
 ## [v0.5.2](https://github.com/iwasrobbed/Down/tree/v0.5.2) (2018-05-05)
 [Full Changelog](https://github.com/iwasrobbed/Down/compare/v0.5.1...v0.5.2)
 

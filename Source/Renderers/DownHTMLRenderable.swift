@@ -34,7 +34,7 @@ public extension DownHTMLRenderable {
      - returns: HTML string
      */
     
-    public func toHTML(_ options: DownOptions = .default) throws -> String {
+    func toHTML(_ options: DownOptions = .default) throws -> String {
         return try markdownString.toHTML(options)
     }
 }

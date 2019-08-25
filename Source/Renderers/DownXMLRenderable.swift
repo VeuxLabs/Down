@@ -34,7 +34,7 @@ public extension DownXMLRenderable {
      - returns: XML string
      */
     
-    public func toXML(_ options: DownOptions = .default) throws -> String {
+    func toXML(_ options: DownOptions = .default) throws -> String {
         let ast = try DownASTRenderer.stringToAST(markdownString, options: options)
         let xml = try DownXMLRenderer.astToXML(ast, options: options)
         cmark_node_free(ast)
