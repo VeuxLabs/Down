@@ -17,6 +17,8 @@ public typealias DownViewClosure = () -> ()
 
 open class DownView: WKWebView {
 
+    
+    public var darkModeEnabled = false
     /**
      Initializes a web view with the results of rendering a CommonMark Markdown string
 
@@ -29,19 +31,20 @@ open class DownView: WKWebView {
 
      - returns: An instance of Self
      */
-    public init(frame: CGRect, markdownString: String, openLinksInBrowser: Bool = true, templateBundle: Bundle? = nil, configuration: WKWebViewConfiguration? = nil, didLoadSuccessfully: DownViewClosure? = nil) throws {
+    public init(frame: CGRect, markdownString: String, openLinksInBrowser: Bool = true, darkModeEnabled: Bool, templateBundle: Bundle? = nil, configuration: WKWebViewConfiguration? = nil, didLoadSuccessfully: DownViewClosure? = nil) throws {
+        self.darkModeEnabled = darkModeEnabled
         self.didLoadSuccessfully = didLoadSuccessfully
 
         if let templateBundle = templateBundle {
             self.bundle = templateBundle
         } else {
             let classBundle = Bundle(for: DownView.self)
-            let url = classBundle.url(forResource: "DownView", withExtension: "bundle")!
+            let url = classBundle.url(forResource: darkModeEnabled ? "DownView-dark" : "DownView", withExtension: "bundle")!
             self.bundle = Bundle(url: url)!
         }
 
         super.init(frame: frame, configuration: configuration ?? WKWebViewConfiguration())
-
+        
         #if os(macOS)
             setupMacEnvironment()
         #endif
@@ -71,6 +74,10 @@ open class DownView: WKWebView {
      - throws: `DownErrors` depending on the scenario
      */
     public func update(markdownString: String, didLoadSuccessfully: DownViewClosure? = nil) throws {
+        darkModeEnabled = true
+        let classBundle = Bundle(for: DownView.self)
+        let url = classBundle.url(forResource: darkModeEnabled ? "DownView-dark" : "DownView", withExtension: "bundle")!
+        self.bundle = Bundle(url: url)!
         // Note: As the init method takes this callback already, we only overwrite it here if
         // a non-nil value is passed in
         if let didLoadSuccessfully = didLoadSuccessfully {
@@ -82,7 +89,7 @@ open class DownView: WKWebView {
 
     // MARK: - Private Properties
 
-    let bundle: Bundle
+    var bundle: Bundle
 
     fileprivate lazy var baseURL: URL = {
         return self.bundle.url(forResource: "index", withExtension: "html")!
@@ -107,13 +114,18 @@ private extension DownView {
     func loadHTMLView(_ markdownString: String) throws {
         let htmlString = try markdownString.toHTML()
         let pageHTMLString = try htmlFromTemplate(htmlString)
-
         #if os(iOS)
             loadHTMLString(pageHTMLString, baseURL: baseURL)
         #elseif os(macOS)
             let indexURL = try createTemporaryBundle(pageHTMLString: pageHTMLString)
             loadFileURL(indexURL, allowingReadAccessTo: indexURL.deletingLastPathComponent())
         #endif
+    }
+    
+    private func initBundle() {
+        let classBundle = Bundle(for: DownView.self)
+        let url = classBundle.url(forResource: "DownView-dark", withExtension: "bundle")!
+        self.bundle = Bundle(url: url)!
     }
 
     func htmlFromTemplate(_ htmlString: String) throws -> String {
